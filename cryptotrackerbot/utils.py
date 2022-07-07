@@ -108,6 +108,7 @@ def string_to_number(string):
 
 def build_graph(ohlc, title=''):
     fig = plt.figure(figsize=(15, 7.5))
+    ioff()
     ax1 = fig.add_subplot(111)
 
     for i in ohlc:
