@@ -23,12 +23,12 @@ from cryptotrackerbot import emoji
 
 from telegram.ext.dispatcher import run_async
 
-@run_async
 
+@run_async
 def evmos_command(bot, update, job_queue):
-    
+
     response = cryptoapi.get_evmos()
-    #print(response)
+    # print(response)
     # if 'Response' in response and response['Response'] == 'Error':  # return if response from api is error
     #     text = "<b>Error!</b>"
     #     text += "\n{}".format(response['Message']) if 'Message' in response else ''
@@ -40,33 +40,40 @@ def evmos_command(bot, update, job_queue):
     text += "<b>— {}:</b>".format(coin)
     prices = response[coin]
     for fiat in prices:
-        emoji_coin = emoji.USD if fiat.upper() == 'USD' else emoji.CNY if fiat.upper() == 'CNY' else emoji.NT if fiat.upper() == 'NT' else ""
-        text += "\n  - {}{}: {}".format(emoji_coin, fiat, utils.sep(prices[fiat]))
+        emoji_coin = emoji.USD if fiat.upper() == 'USD' else emoji.CNY if fiat.upper(
+        ) == 'CNY' else emoji.NT if fiat.upper() == 'NT' else ""
+        text += "\n  - {}{}: {}".format(emoji_coin,
+                                        fiat, utils.sep(prices[fiat]))
     text += "\n\n"
-    utils.send_autodestruction_message(bot, update, job_queue, text, destruct_in=1200)
+    utils.send_autodestruction_message(
+        bot, update, job_queue, text, destruct_in=1200)
+
 
 @run_async
 def price_command(bot, update, args, job_queue):
-    if  "EVMOS" in args.keys():  # return if no args added
-        text = "查詢evmos價格可直接 使用 /e"
+    if "EVMOS" in args or "evmos" in args:  # return if no args added
+        text = "溫馨提示：查詢evmos價格可直接 使用 /e"
     else:
         text = ""
-    
+
     response = cryptoapi.get_price(args)
-    #print(response)
-    if 'Response' in response and response['Response'] == 'Error':  # return if response from api is error
+    # print(response)
+    # return if response from api is error
+    if 'Response' in response and response['Response'] == 'Error':
         text = "<b>Error!</b>"
-        text += "\n{}".format(response['Message']) if 'Message' in response else ''
+        text += "\n{}".format(response['Message']
+                              ) if 'Message' in response else ''
         utils.send_autodestruction_message(bot, update, job_queue, text)
         return
-      
-    
+
     for coin in response:
         text += "<b>— {}:</b>".format(coin)
         prices = response[coin]
         for fiat in prices:
-            emoji_coin = emoji.CNY if fiat.upper() == 'CNY' else emoji.USD if fiat.upper() == 'USD' else emoji.EUR if fiat.upper() == 'EUR' else ""
-            text += "\n  - {}{}: {}".format(emoji_coin, fiat, utils.sep(prices[fiat]))
+            emoji_coin = emoji.CNY if fiat.upper() == 'CNY' else emoji.USD if fiat.upper(
+            ) == 'USD' else emoji.EUR if fiat.upper() == 'EUR' else ""
+            text += "\n  - {}{}: {}".format(emoji_coin,
+                                            fiat, utils.sep(prices[fiat]))
         text += "\n\n"
     utils.send_autodestruction_message(bot, update, job_queue, text)
 
@@ -85,7 +92,8 @@ def help(bot, update, job_queue):
         "\n"
         "This bot is <a href=\"https://github.com/91DarioDev/CryptoTrackerBot\">released under the terms of AGPL 3.0 LICENSE</a>."
     )
-    utils.send_autodestruction_message(bot, update, job_queue, text, destruct_in=120, disable_web_page_preview=True)
+    utils.send_autodestruction_message(
+        bot, update, job_queue, text, destruct_in=120, disable_web_page_preview=True)
 
 
 @run_async
@@ -94,12 +102,15 @@ def rank_command(bot, update, job_queue):
     response = cryptoapi.get_rank()
     for coin in response:
         text += "<b>{}){}:</b>".format(coin['rank'], coin['symbol'])
-        text += " {}".format("+" if utils.string_to_number(coin["percent_change_24h"]) > 0 else "")
-        text += "{}%{}".format(coin["percent_change_24h"], utils.arrow_up_or_down(utils.string_to_number(coin["percent_change_24h"])))
-        text += " {}{}".format(utils.sep(round(utils.string_to_number(coin['price_usd']), 2)), emoji.USD)
+        text += " {}".format("+" if utils.string_to_number(
+            coin["percent_change_24h"]) > 0 else "")
+        text += "{}%{}".format(coin["percent_change_24h"], utils.arrow_up_or_down(
+            utils.string_to_number(coin["percent_change_24h"])))
+        text += " {}{}".format(
+            utils.sep(round(utils.string_to_number(coin['price_usd']), 2)), emoji.USD)
         text += "\n"
-    utils.send_autodestruction_message(bot, update, job_queue, text, destruct_in=120)
-
+    utils.send_autodestruction_message(
+        bot, update, job_queue, text, destruct_in=120)
 
 
 @run_async
@@ -109,10 +120,9 @@ def graph_command(bot, update, job_queue, args):
         utils.send_autodestruction_message(bot, update, job_queue, text)
         return
     coin = args[0]
-    intervals = ['1d', '1w']#, 'day']
+    intervals = ['1d', '1w']  # , 'day']
     for interval in intervals:
         send_graph(bot, update, job_queue, coin, interval)
-
 
 
 def send_graph(bot, update, job_queue, coin, interval):
@@ -124,24 +134,31 @@ def send_graph(bot, update, job_queue, coin, interval):
         limit = 600
         interval_string = 'hour'
         aggregate = 1
-    response = cryptoapi.get_history(coin, aggregate=aggregate, limit=limit, interval=interval_string)
-    if 'Response' in response and response['Response'] == 'Error':  # return if response from api is error
+    response = cryptoapi.get_history(
+        coin, aggregate=aggregate, limit=limit, interval=interval_string)
+    # return if response from api is error
+    if 'Response' in response and response['Response'] == 'Error':
         text = "<b>Error!</b>"
-        text += "\n{}".format(response['Message']) if 'Message' in response else ''
+        text += "\n{}".format(response['Message']
+                              ) if 'Message' in response else ''
         utils.send_autodestruction_message(bot, update, job_queue, text)
         return
-    utils.send_sending_photo_alert(bot, update) # so user knows the bot is running
+    # so user knows the bot is running
+    utils.send_sending_photo_alert(bot, update)
     data = response['Data']
     cut_data = []
     for i in data:
-        if interval == '1d' and i['time'] < (time.time() - 60*60*24):  # stats blocked 1 day
+        # stats blocked 1 day
+        if interval == '1d' and i['time'] < (time.time() - 60*60*24):
             continue
-        if interval == '1w' and i['time'] < (time.time() - 60*60*24*7):  # stats blocked 1w
+        # stats blocked 1w
+        if interval == '1w' and i['time'] < (time.time() - 60*60*24*7):
             continue
         cut_data.append(i)
     caption = "{} - USD. INTERVAL: {}".format(
-        coin.upper(), 
+        coin.upper(),
         "1 day" if interval == '1d' else "1 week" if interval == '1w' else ''
     )
     pic = utils.build_graph(cut_data, title=caption)
-    utils.send_autodestruction_photo(bot, update, pic, caption, job_queue, destruct_in=60, quote=False)
+    utils.send_autodestruction_photo(
+        bot, update, pic, caption, job_queue, destruct_in=60, quote=False)
