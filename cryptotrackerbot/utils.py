@@ -14,7 +14,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
 import matplotlib.pyplot as plt
-from matplotlib import pyplot
 import io
 import datetime
 from telegram.ext.dispatcher import run_async
@@ -25,7 +24,6 @@ import matplotlib.dates as mdates
 from matplotlib.finance import candlestick_ohlc
 from telegram.error import BadRequest
 from cryptotrackerbot import emoji
-
 import matplotlib
 matplotlib.use('Agg')
 
@@ -136,6 +134,6 @@ def build_graph(ohlc, title=''):
     bio = io.BytesIO()
     bio.name = "test.png"
     fig.savefig(bio, format='png')
-    pyplot.close()  # important to free memory
+    plt.close()  # important to free memory
     bio.seek(0)
     return bio
