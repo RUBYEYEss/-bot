@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
 import matplotlib.pyplot as plt
+from matplotlib import pyplot
 import io
 import datetime
 from telegram.ext.dispatcher import run_async
