@@ -29,7 +29,7 @@ setuptools.setup(
     author_email="dariomsn@hotmail.it",
 
     install_requires=[
-        "python-telegram-bot",
+        "python-telegram-bot<11.1.0",
         "requests",
         "matplotlib<2.2.0",
         "image"
