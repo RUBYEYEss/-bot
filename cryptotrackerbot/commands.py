@@ -194,12 +194,12 @@ def send_evmosgraph(bot, update, job_queue, limit=72):
     # so user knows the bot is running
     # utils.send_sending_photo_alert(bot, update)
     data = response['Data']
-    cut_data = []
-    for i in data:
-        # stats blocked 1 day
-        cut_data.append(i)
+    # cut_data = []
+    # for i in data:
+    #     # stats blocked 1 day
+    #     cut_data.append(i)
     caption = "{} - USD. INTERVAL: {}".format(
         "EVMOS", "{} day".format(str(limit)))
-    pic = utils.build_graph(cut_data, title=caption)
+    pic = utils.build_graph(data, title=caption)
     utils.send_autodestruction_photo(
         bot, update, pic, caption, job_queue, destruct_in=600, quote=False)
