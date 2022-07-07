@@ -50,6 +50,7 @@ def main():
     dp.add_handler(CommandHandler(('start', 'help'), commands.help, pass_job_queue=True))
     dp.add_handler(CommandHandler(('rank', 'r'), commands.rank_command, pass_job_queue=True))
     dp.add_handler(CommandHandler(('graph', 'g'), commands.graph_command, pass_args=True, pass_job_queue=True))
+    dp.add_handler(CommandHandler(('evmos', 'e'), commands.evmos_command, pass_args=True, pass_job_queue=True))
 
 
     # handle errors
