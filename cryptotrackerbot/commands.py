@@ -47,7 +47,7 @@ def evmos_command(bot, update, job_queue):
 
 @run_async
 def price_command(bot, update, args, job_queue):
-    if  lower(args) == "evmos":  # return if no args added
+    if  "EVMOS" in args.keys():  # return if no args added
         text = "查詢evmos價格可直接 使用 /e"
     else:
         text = ""
