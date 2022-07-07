@@ -29,7 +29,7 @@ from telegram.ext.dispatcher import run_async
 import datetime
 import io
 import matplotlib
-matplotlib.use('Agg')
+# matplotlib.use('Agg')
 
 
 @run_async
