@@ -174,7 +174,7 @@ def send_graph(bot, update, job_queue, coin, interval):
         bot, update, pic, caption, job_queue, destruct_in=600, quote=False)
 
 
-def send_evmosgraph(bot, update, job_queue, limit=72):
+def send_evmosgraph(bot, update, job_queue, limit=480):
     # if interval == '1d':
     #     limit = 600
     #     interval_string = 'minute'
@@ -183,7 +183,7 @@ def send_evmosgraph(bot, update, job_queue, limit=72):
     #     limit = 600
     #     interval_string = 'hour'
     #     aggregate = 1
-    response = cryptoapi.get_evmosgraph(limit=72)
+    response = cryptoapi.get_evmosgraph(limit)
     # return if response from api is error
     if 'Response' in response and response['Response'] == 'Error':
         text = "<b>Error!</b>"
@@ -198,8 +198,8 @@ def send_evmosgraph(bot, update, job_queue, limit=72):
     # for i in data:
     #     # stats blocked 1 day
     #     cut_data.append(i)
-    caption = "{} - USD. 間隔: {}".format(
-        "EVMOS", "{} 小時".format(str(limit)))
+    caption = "{} - USD. interval: {}".format(
+        "EVMOS", "{} hours".format(str(limit)))
     pic = utils.build_graph(data, title=caption)
     utils.send_autodestruction_photo(
         bot, update, pic, caption, job_queue, destruct_in=600, quote=False)

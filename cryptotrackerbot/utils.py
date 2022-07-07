@@ -122,7 +122,7 @@ def build_graph(ohlc, title=''):
         sub_lst = i['time'], i['open'], i['high'], i['low'], i['close']
         data.append(sub_lst)
     candlestick_ohlc(ax1, data, width=candel_width, colorup='g', colordown='r')
-    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%d-%m %H:%M'))
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %H'))
     ax1.xaxis.set_major_locator(ticker.MaxNLocator(10))
     ax1.grid(True)
 
