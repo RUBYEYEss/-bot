@@ -46,6 +46,7 @@ def evmos_command(bot, update, job_queue):
         text += "\n  - {}{}: {}".format(emoji_coin,
                                         fiat, utils.sep(prices[fiat]))
     text += "\n\n"
+    send_evmosgraph(bot, update, job_queue, limit=72)
     utils.send_autodestruction_message(
         bot, update, job_queue, text, =1200)
 
@@ -172,15 +173,15 @@ def send_graph(bot, update, job_queue, coin, interval):
         bot, update, pic, caption, job_queue, destruct_in=600, quote=False)
 
 
-def send_evmosgraph(bot, update, job_queue, coin, interval):
-    if interval == '1d':
-        limit = 600
-        interval_string = 'minute'
-        aggregate = 10
-    elif interval == '1w':
-        limit = 600
-        interval_string = 'hour'
-        aggregate = 1
+def send_evmosgraph(bot, update, job_queue, limit=72):
+    # if interval == '1d':
+    #     limit = 600
+    #     interval_string = 'minute'
+    #     aggregate = 10
+    # elif interval == '1w':
+    #     limit = 600
+    #     interval_string = 'hour'
+    #     aggregate = 1
     response = cryptoapi.get_evmosgraph(limit=72)
     # return if response from api is error
     if 'Response' in response and response['Response'] == 'Error':
