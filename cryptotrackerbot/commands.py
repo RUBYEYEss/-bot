@@ -28,7 +28,10 @@ matplotlib.use('TKAgg')
 
 @run_async
 def evmos_command(bot, update, args ,job_queue ):
-    print(args)
+    if args== []:
+        limit = 480
+    else:
+        limit = args[1]
     response = cryptoapi.get_evmos()
     # print(response)
     # if 'Response' in response and response['Response'] == 'Error':  # return if response from api is error
@@ -47,10 +50,6 @@ def evmos_command(bot, update, args ,job_queue ):
         text += "\n  - {}{}: {}".format(emoji_coin,
                                         fiat, utils.sep(prices[fiat]))
     text += "\n\n"
-    if args == None:
-        limit = 480
-    else:
-        limit = args
 
     send_evmosgraph(bot, update, job_queue, limit)
     
