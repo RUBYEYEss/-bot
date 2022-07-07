@@ -17,11 +17,11 @@
 import requests
 
 def get_evmos(): 
-    response = requests.get("https://min-api.cryptocompare.com/data/pricemulti?fsyms=evmos&tsyms=USD,CNY,NT").json()
+    response = requests.get("https://min-api.cryptocompare.com/data/pricemulti?fsyms=evmos&tsyms=USD,CNY").json()
     return response
 
 def get_price(coins): 
-    base = "https://min-api.cryptocompare.com/data/pricemulti?fsyms={}&tsyms=USD,CNY,NT"
+    base = "https://min-api.cryptocompare.com/data/pricemulti?fsyms={}&tsyms=USD,CNY"
     upper_coins = [coin.upper() for coin in coins]
     string = ",".join(upper_coins)
     response = requests.get(base.format(string)).json()

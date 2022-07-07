@@ -47,11 +47,11 @@ def evmos_command(bot, update, job_queue):
 
 @run_async
 def price_command(bot, update, args, job_queue):
-#     if len(args) == 0:  # return if no args added
-#         text = "Error: You have to append to the command as parameters the code of the crypto you want\n\nExample:<code>/price btc eth xmr</code>"
-#         utils.send_autodestruction_message(bot, update, job_queue, text)
-#         return
-
+    if  lower(args) == "evmos":  # return if no args added
+        text = "查詢evmos價格可直接 使用 /e"
+    else:
+        text = ""
+        
     response = cryptoapi.get_price(args)
     #print(response)
     if 'Response' in response and response['Response'] == 'Error':  # return if response from api is error
@@ -60,7 +60,7 @@ def price_command(bot, update, args, job_queue):
         utils.send_autodestruction_message(bot, update, job_queue, text)
         return
       
-    text = ""
+    
     for coin in response:
         text += "<b>— {}:</b>".format(coin)
         prices = response[coin]
