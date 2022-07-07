@@ -191,7 +191,7 @@ def send_evmosgraph(bot, update, job_queue, limit=72):
         utils.send_autodestruction_message(bot, update, job_queue, text)
         return
     # so user knows the bot is running
-    utils.send_sending_photo_alert(bot, update)
+    # utils.send_sending_photo_alert(bot, update)
     data = response['Data']
     cut_data = []
     for i in data:
