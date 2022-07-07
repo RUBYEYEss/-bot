@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
 
+from configparser import SafeConfigParser
 import datetime
 import time
 from matplotlib.dates import date2num
@@ -51,11 +52,18 @@ def evmos_command(bot, update, job_queue):
 
 @run_async
 def price_command(bot, update, args, job_queue):
+
+    if "cosmos" in args or "COSMOS" in args:  # return if no args added
+        args += ["atom", "evmos", "osmo", "scrt",
+                 "juno", "kava", "inj", "huahua", "dvpn"]
+    if "evm" in args or "EVM" in args:  # return if no args added
+        args += ["eth", "evmos", "avax", "near", "ftm", "kava", "inj", "tlos"]
+    args = list(set(args))
+
     if "EVMOS" in args or "evmos" in args:  # return if no args added
-        text = "溫馨提示：查詢evmos價格可直接 使用 /e"
+        text = "溫馨提示：查詢evmos價格可直接 使用 /e \n"
     else:
         text = ""
-
     response = cryptoapi.get_price(args)
     # print(response)
     # return if response from api is error

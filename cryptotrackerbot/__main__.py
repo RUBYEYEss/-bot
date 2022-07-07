@@ -17,7 +17,7 @@
 
 import logging
 import sys
-from telegram.ext import (Updater,CommandHandler,MessageHandler,Filters)
+from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters)
 
 from cryptotrackerbot import commands
 
@@ -35,23 +35,25 @@ def main():
     if len(sys.argv) == 2:
         bot_token = sys.argv[1]
     else:
-        print("\n!WARNING!:\nadd the bot token as paramter when running the bot.\nExiting...")
+        print(
+            "\n!WARNING!:\nadd the bot token as paramter when running the bot.\nExiting...")
         sys.exit(0)
 
     print("\nrunning...")
     # define the updater
     updater = Updater(token=bot_token, workers=10)
-    
+
     # define the dispatcher
     dp = updater.dispatcher
 
     # commands
-    dp.add_handler(CommandHandler(('price', 'p'), commands.price_command, pass_args=True, pass_job_queue=True))
-    dp.add_handler(CommandHandler(('start', 'help'), commands.help, pass_job_queue=True))
-    dp.add_handler(CommandHandler(('rank', 'r'), commands.rank_command, pass_job_queue=True))
-    dp.add_handler(CommandHandler(('graph', 'g'), commands.graph_command, pass_args=True, pass_job_queue=True))
-    dp.add_handler(CommandHandler(('evmos', 'e'), commands.evmos_command, pass_args=False, pass_job_queue=True))
-
+    dp.add_handler(CommandHandler(
+        ('price', 'p'), commands.price_command, pass_args=True, pass_job_queue=True))
+    # dp.add_handler(CommandHandler(('start', 'help'), commands.help, pass_job_queue=True))
+    # dp.add_handler(CommandHandler(('rank', 'r'), commands.rank_command, pass_job_queue=True))
+    # dp.add_handler(CommandHandler(('graph', 'g'), commands.graph_command, pass_args=True, pass_job_queue=True))
+    dp.add_handler(CommandHandler(
+        ('evmos', 'e'), commands.evmos_command, pass_args=False, pass_job_queue=True))
 
     # handle errors
     dp.add_error_handler(error)
