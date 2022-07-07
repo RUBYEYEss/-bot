@@ -36,7 +36,7 @@ def evmos_command(bot, update, job_queue):
     #     return
     
     text = ""
-    coin = "evmos"
+    coin = "EVMOS"
     text += "<b>— {}:</b>".format(coin)
     prices = response[coin]
     for fiat in prices:
