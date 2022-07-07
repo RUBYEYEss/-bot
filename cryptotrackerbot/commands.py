@@ -23,7 +23,7 @@ from cryptotrackerbot import cryptoapi
 from cryptotrackerbot import utils
 from cryptotrackerbot import emoji
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('TKAgg')
 
 
 @run_async
