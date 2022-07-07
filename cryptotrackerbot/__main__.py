@@ -18,7 +18,7 @@
 import logging
 import sys
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters)
-import tkinter
+# import tkinter
 
 from cryptotrackerbot import commands
 
