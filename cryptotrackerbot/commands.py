@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
 
+from telegram.ext.dispatcher import run_async
 from configparser import SafeConfigParser
 import datetime
 import time
@@ -21,8 +22,8 @@ from matplotlib.dates import date2num
 from cryptotrackerbot import cryptoapi
 from cryptotrackerbot import utils
 from cryptotrackerbot import emoji
-
-from telegram.ext.dispatcher import run_async
+import matplotlib
+matplotlib.use('Agg')
 
 
 @run_async
