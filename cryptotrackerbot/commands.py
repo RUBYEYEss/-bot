@@ -47,10 +47,10 @@ def evmos_command(bot, update, job_queue):
 
 @run_async
 def price_command(bot, update, args, job_queue):
-    if len(args) == 0:  # return if no args added
-        text = "Error: You have to append to the command as parameters the code of the crypto you want\n\nExample:<code>/price btc eth xmr</code>"
-        utils.send_autodestruction_message(bot, update, job_queue, text)
-        return
+#     if len(args) == 0:  # return if no args added
+#         text = "Error: You have to append to the command as parameters the code of the crypto you want\n\nExample:<code>/price btc eth xmr</code>"
+#         utils.send_autodestruction_message(bot, update, job_queue, text)
+#         return
 
     response = cryptoapi.get_price(args)
     #print(response)
@@ -59,15 +59,15 @@ def price_command(bot, update, args, job_queue):
         text += "\n{}".format(response['Message']) if 'Message' in response else ''
         utils.send_autodestruction_message(bot, update, job_queue, text)
         return
-
-    text = ""
-    for coin in response:
-        text += "<b>— {}:</b>".format(coin)
-        prices = response[coin]
-        for fiat in prices:
-            emoji_coin = emoji.BTC if fiat.upper() == 'BTC' else emoji.USD if fiat.upper() == 'USD' else emoji.EUR if fiat.upper() == 'EUR' else ""
-            text += "\n  - {}{}: {}".format(emoji_coin, fiat, utils.sep(prices[fiat]))
-        text += "\n\n"
+      text=string(response)
+#     text = ""
+#     for coin in response:
+#         text += "<b>— {}:</b>".format(coin)
+#         prices = response[coin]
+#         for fiat in prices:
+#             emoji_coin = emoji.BTC if fiat.upper() == 'BTC' else emoji.USD if fiat.upper() == 'USD' else emoji.EUR if fiat.upper() == 'EUR' else ""
+#             text += "\n  - {}{}: {}".format(emoji_coin, fiat, utils.sep(prices[fiat]))
+#         text += "\n\n"
     utils.send_autodestruction_message(bot, update, job_queue, text)
 
 
