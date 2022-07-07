@@ -51,7 +51,7 @@ def price_command(bot, update, args, job_queue):
         text = "查詢evmos價格可直接 使用 /e"
     else:
         text = ""
-        
+    
     response = cryptoapi.get_price(args)
     #print(response)
     if 'Response' in response and response['Response'] == 'Error':  # return if response from api is error
@@ -65,7 +65,7 @@ def price_command(bot, update, args, job_queue):
         text += "<b>— {}:</b>".format(coin)
         prices = response[coin]
         for fiat in prices:
-            emoji_coin = emoji.BTC if fiat.upper() == 'BTC' else emoji.USD if fiat.upper() == 'USD' else emoji.EUR if fiat.upper() == 'EUR' else ""
+            emoji_coin = emoji.CNY if fiat.upper() == 'CNY' else emoji.USD if fiat.upper() == 'USD' else emoji.EUR if fiat.upper() == 'EUR' else ""
             text += "\n  - {}{}: {}".format(emoji_coin, fiat, utils.sep(prices[fiat]))
         text += "\n\n"
     utils.send_autodestruction_message(bot, update, job_queue, text)
