@@ -13,22 +13,22 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
-
-from matplotlib import pyplot
 import matplotlib.pyplot as plt
-from cryptotrackerbot import emoji
-from telegram.error import BadRequest
-from matplotlib.finance import candlestick_ohlc
-import matplotlib.dates as mdates
-from matplotlib import ticker
-from PIL import Image
-from matplotlib.dates import date2num
-
-from telegram.ext.dispatcher import run_async
-
-import datetime
 import io
+import datetime
+from telegram.ext.dispatcher import run_async
+from matplotlib.dates import date2num
+from PIL import Image
+from matplotlib import ticker
+import matplotlib.dates as mdates
+from matplotlib.finance import candlestick_ohlc
+from telegram.error import BadRequest
+from cryptotrackerbot import emoji
+
 import matplotlib
+matplotlib.use('Agg')
+
+
 # matplotlib.use('Agg')
 
 
