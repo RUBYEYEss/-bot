@@ -35,7 +35,7 @@ def evmos_command(bot, update, job_queue):
     #     utils.send_autodestruction_message(bot, update, job_queue, text)
     #     return
 
-    # text = ""
+    text = ""
     for coin in response:
         text += "<b>— {}:</b>".format(coin)
         prices = response[coin]
