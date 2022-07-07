@@ -170,3 +170,36 @@ def send_graph(bot, update, job_queue, coin, interval):
     pic = utils.build_graph(cut_data, title=caption)
     utils.send_autodestruction_photo(
         bot, update, pic, caption, job_queue, destruct_in=600, quote=False)
+
+
+def send_evmosgraph(bot, update, job_queue, coin, interval):
+    if interval == '1d':
+        limit = 600
+        interval_string = 'minute'
+        aggregate = 10
+    elif interval == '1w':
+        limit = 600
+        interval_string = 'hour'
+        aggregate = 1
+    response = cryptoapi.get_evmosgraph(limit=72)
+    # return if response from api is error
+    if 'Response' in response and response['Response'] == 'Error':
+        text = "<b>Error!</b>"
+        text += "\n{}".format(response['Message']
+                              ) if 'Message' in response else ''
+        utils.send_autodestruction_message(bot, update, job_queue, text)
+        return
+    # so user knows the bot is running
+    utils.send_sending_photo_alert(bot, update)
+    data = response['Data']
+    cut_data = []
+    for i in data:
+        # stats blocked 1 day
+        cut_data.append(i)
+    caption = "{} - USD. INTERVAL: {}".format(
+        "EVMOS",
+        "{} day".format(str(limit))）
+    )
+    pic = utils.build_graph(cut_data, title=caption)
+    utils.send_autodestruction_photo(
+        bot, update, pic, caption, job_queue, destruct_in=600, quote=False)

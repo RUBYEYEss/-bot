@@ -87,7 +87,7 @@ def destruction(bot, job):
 
 @run_async
 def send_sending_photo_alert(bot, update):
-    bot.sendChatAction(chat_id=update.effective_chat.id, action='UPLOAD_PHOTO')
+    bot.sendChatAction(chat_id=update.effective_chat.id, action='上傳圖片中')
 
 
 def sep(num, none_is_zero=False):

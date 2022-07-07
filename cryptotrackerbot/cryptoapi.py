@@ -23,6 +23,12 @@ def get_evmos():
     return response
 
 
+def get_evmosgraph(limit=72):
+    response = requests.get(
+        "https: // min-api.cryptocompare.com/data/v2/histohour?fsym = evmos & tsym = USDT & limit = {} & e = DigiFinex".format(limit)).json()
+    return response
+
+
 def get_price(coins):
     base = "https://min-api.cryptocompare.com/data/pricemulti?fsyms={}&tsyms=USD,CNY"
     upper_coins = [coin.upper() for coin in coins]
