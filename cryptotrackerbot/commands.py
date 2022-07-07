@@ -25,7 +25,7 @@ from telegram.ext.dispatcher import run_async
 
 @run_async
 
-def evmos_command(bot, update, args, job_queue):
+def evmos_command(bot, update, job_queue):
     
     response = cryptoapi.get_price("evmos")
     #print(response)
