@@ -34,16 +34,16 @@ def evmos_command(bot, update, job_queue):
     #     text += "\n{}".format(response['Message']) if 'Message' in response else ''
     #     utils.send_autodestruction_message(bot, update, job_queue, text)
     #     return
-
+    
     text = ""
-    for coin in response:
-        text += "<b>— {}:</b>".format(coin)
-        prices = response[coin]
-        for fiat in prices:
-            emoji_coin = emoji.USD if fiat.upper() == 'USD' else emoji.CNY if fiat.upper() == 'CNY' else emoji.NT if fiat.upper() == 'NT' else ""
-            text += "\n  - {}{}: {}".format(emoji_coin, fiat, utils.sep(prices[fiat]))
-        text += "\n\n"
-    utils.send_autodestruction_message(bot, update, job_queue, text)
+    coin = "evmos"
+    text += "<b>— {}:</b>".format(coin)
+    prices = response[coin]
+    for fiat in prices:
+        emoji_coin = emoji.USD if fiat.upper() == 'USD' else emoji.CNY if fiat.upper() == 'CNY' else emoji.NT if fiat.upper() == 'NT' else ""
+        text += "\n  - {}{}: {}".format(emoji_coin, fiat, utils.sep(prices[fiat]))
+    text += "\n\n"
+    utils.send_autodestruction_message(bot, update, job_queue, text, destruct_in=1200)
 
 @run_async
 def price_command(bot, update, args, job_queue):
