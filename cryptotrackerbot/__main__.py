@@ -15,12 +15,13 @@
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from cryptotrackerbot import commands
 import logging
 import sys
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters)
+import matplotlib
+matplotlib.use('Agg')
 # import tkinter
-
-from cryptotrackerbot import commands
 
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
