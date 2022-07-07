@@ -17,11 +17,7 @@
 
 import logging
 import sys
-from telegram.ext import (
-    Updater,
-    CommandHandler,
-    MessageHandler,
-    Filters)
+from telegram.ext import (Updater,CommandHandler,MessageHandler,Filters)
 
 from cryptotrackerbot import commands
 
