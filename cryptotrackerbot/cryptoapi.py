@@ -25,7 +25,7 @@ def get_evmos():
 
 def get_evmosgraph(limit=72):
     response = requests.get(
-        "https: // min-api.cryptocompare.com/data/v2/histohour?fsym = evmos & tsym = USDT & limit = {} & e = DigiFinex".format(limit)).json()
+        "https://min-api.cryptocompare.com/data/v2/histohour?fsym=evmos&tsym=USDT&limit={}&e=DigiFinex".format(limit)).json()
     return response
 
 
