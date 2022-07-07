@@ -27,7 +27,7 @@ matplotlib.use('TKAgg')
 
 
 @run_async
-def evmos_command(bot, update, job_queue):
+def evmos_command(bot, update, args, job_queue):
 
     response = cryptoapi.get_evmos()
     # print(response)
@@ -47,7 +47,13 @@ def evmos_command(bot, update, job_queue):
         text += "\n  - {}{}: {}".format(emoji_coin,
                                         fiat, utils.sep(prices[fiat]))
     text += "\n\n"
-    send_evmosgraph(bot, update, job_queue, limit=72)
+    if args == None:
+        limit = 480
+    else:
+        limit = args[0]
+
+    send_evmosgraph(bot, update, job_queue, limit)
+    
     utils.send_autodestruction_message(
         bot, update, job_queue, text)
 
@@ -174,7 +180,7 @@ def send_graph(bot, update, job_queue, coin, interval):
         bot, update, pic, caption, job_queue, destruct_in=600, quote=False)
 
 
-def send_evmosgraph(bot, update, job_queue, limit=480):
+def send_evmosgraph(bot, update, job_queue, limit):
     # if interval == '1d':
     #     limit = 600
     #     interval_string = 'minute'
