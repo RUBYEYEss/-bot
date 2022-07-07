@@ -34,7 +34,7 @@ def evmos_command(bot, update, job_queue):
     #     text += "\n{}".format(response['Message']) if 'Message' in response else ''
     #     utils.send_autodestruction_message(bot, update, job_queue, text)
     #     return
-    text=string(response)
+    text=str(response)
 #     text = ""
 #     coin = "EVMOS"
 #     text += "<b>— {}:</b>".format(coin)
