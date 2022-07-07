@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
+from re import I
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -113,6 +114,7 @@ def build_graph(ohlc, title=''):
     ax1 = fig.add_subplot(111)
 
     for i in ohlc:
+        print(i)
         i['time'] = date2num(datetime.datetime.fromtimestamp(i['time']))
     candel_width = (2/3) * (ohlc[1]['time'] - ohlc[0]['time'])
     data = []
