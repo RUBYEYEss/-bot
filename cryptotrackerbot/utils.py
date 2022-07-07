@@ -15,58 +15,61 @@
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from cryptotrackerbot import emoji
+from telegram.error import BadRequest
+from matplotlib.finance import candlestick_ohlc
+import matplotlib.dates as mdates
+from matplotlib import ticker
+from PIL import Image
+from matplotlib.dates import date2num
+from matplotlib import pyplot
 from telegram.ext.dispatcher import run_async
 
 import datetime
 import io
 import matplotlib
 matplotlib.use('Agg')
-from matplotlib import pyplot
-from matplotlib.dates import date2num
-from PIL import Image
 
-from matplotlib import ticker
-import matplotlib.dates as mdates
-from matplotlib.finance import candlestick_ohlc
-
-from telegram.ext.dispatcher import run_async
-from telegram.error import BadRequest
-from cryptotrackerbot import emoji
 
 matplotlib.use('Agg')
 
 
 @run_async
-def send_autodestruction_message(bot, update, job_queue, text, parse_mode='HTML', 
-                                destruct_in=20, quote=False, disable_web_page_preview=True):
+def send_autodestruction_message(bot, update, job_queue, text, parse_mode='HTML',
+                                 destruct_in=600, quote=False, disable_web_page_preview=True):
     if update.effective_chat.type == "private":
-        update.message.reply_text(text, parse_mode=parse_mode, disable_web_page_preview=disable_web_page_preview)
+        update.message.reply_text(
+            text, parse_mode=parse_mode, disable_web_page_preview=disable_web_page_preview)
     else:
-        message_id = update.message.reply_text(text, parse_mode=parse_mode, quote=quote, 
-                                                disable_web_page_preview=disable_web_page_preview).message_id
+        message_id = update.message.reply_text(text, parse_mode=parse_mode, quote=quote,
+                                               disable_web_page_preview=disable_web_page_preview).message_id
         chat_id = update.effective_chat.id
         command_id = update.message.message_id
         job_queue.run_once(
-            destruction, 
-            destruct_in, 
+            destruction,
+            destruct_in,
             context=[chat_id, command_id, message_id]
         )
 
 
 @run_async
-def send_autodestruction_photo(bot, update, pic, caption, job_queue, 
-                                destruct_in=60, quote=False):
+def send_autodestruction_photo(bot, update, pic, caption, job_queue,
+                               destruct_in=600, quote=False):
     if update.effective_chat.type == "private":
-        bot.sendChatAction(chat_id=update.effective_chat.id, action='UPLOAD_PHOTO')
-        bot.send_photo(chat_id=update.effective_chat.id, photo=pic, caption=caption)
+        bot.sendChatAction(chat_id=update.effective_chat.id,
+                           action='UPLOAD_PHOTO')
+        bot.send_photo(chat_id=update.effective_chat.id,
+                       photo=pic, caption=caption)
     else:
-        bot.sendChatAction(chat_id=update.effective_chat.id, action='UPLOAD_PHOTO')
-        message_id = bot.send_photo(chat_id=update.effective_chat.id, photo=pic, caption=caption).message_id
+        bot.sendChatAction(chat_id=update.effective_chat.id,
+                           action='UPLOAD_PHOTO')
+        message_id = bot.send_photo(
+            chat_id=update.effective_chat.id, photo=pic, caption=caption).message_id
         chat_id = update.effective_chat.id
         command_id = update.message.message_id
         job_queue.run_once(
-            destruction, 
-            destruct_in, 
+            destruction,
+            destruct_in,
             context=[chat_id, command_id, message_id]
         )
 
@@ -79,7 +82,7 @@ def destruction(bot, job):
         try:
             bot.deleteMessage(chat_id=chat_id, message_id=msg)
         except BadRequest:
-                pass
+            pass
 
 
 @run_async
@@ -106,7 +109,6 @@ def string_to_number(string):
     return number
 
 
-
 def build_graph(ohlc, title=''):
     fig = pyplot.figure(figsize=(15, 7.5))
     ax1 = fig.add_subplot(111)
@@ -130,7 +132,7 @@ def build_graph(ohlc, title=''):
     fig.tight_layout()
     fig.autofmt_xdate()
 
-    #pyplot.show()  # no need to call show on server
+    # pyplot.show()  # no need to call show on server
 
     bio = io.BytesIO()
     bio.name = "test.png"

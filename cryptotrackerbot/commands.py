@@ -47,7 +47,7 @@ def evmos_command(bot, update, job_queue):
                                         fiat, utils.sep(prices[fiat]))
     text += "\n\n"
     utils.send_autodestruction_message(
-        bot, update, job_queue, text, destruct_in=1200)
+        bot, update, job_queue, text, =1200)
 
 
 @run_async
@@ -169,4 +169,4 @@ def send_graph(bot, update, job_queue, coin, interval):
     )
     pic = utils.build_graph(cut_data, title=caption)
     utils.send_autodestruction_photo(
-        bot, update, pic, caption, job_queue, destruct_in=60, quote=False)
+        bot, update, pic, caption, job_queue, destruct_in=600, quote=False)
