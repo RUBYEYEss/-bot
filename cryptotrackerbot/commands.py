@@ -48,7 +48,7 @@ def evmos_command(bot, update, job_queue):
     text += "\n\n"
     send_evmosgraph(bot, update, job_queue, limit=72)
     utils.send_autodestruction_message(
-        bot, update, job_queue, text, =1200)
+        bot, update, job_queue, text)
 
 
 @run_async
