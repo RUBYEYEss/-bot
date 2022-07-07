@@ -32,7 +32,8 @@ setuptools.setup(
         "python-telegram-bot<11.1.0",
         "requests",
         "matplotlib<2.2.0",
-        "image"
+        "image",
+        "tkinter"
     ],
 
     packages=[
