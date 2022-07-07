@@ -50,7 +50,7 @@ def evmos_command(bot, update, job_queue, args=480 ):
     if args == None:
         limit = 480
     else:
-        limit = args[0]
+        limit = args
 
     send_evmosgraph(bot, update, job_queue, limit)
     
