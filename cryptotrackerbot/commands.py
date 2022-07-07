@@ -193,7 +193,7 @@ def send_evmosgraph(bot, update, job_queue, limit=72):
         return
     # so user knows the bot is running
     # utils.send_sending_photo_alert(bot, update)
-    data = response['Data']
+    data = response['Data']["Data"]
     # cut_data = []
     # for i in data:
     #     # stats blocked 1 day
