@@ -198,9 +198,7 @@ def send_evmosgraph(bot, update, job_queue, limit=72):
         # stats blocked 1 day
         cut_data.append(i)
     caption = "{} - USD. INTERVAL: {}".format(
-        "EVMOS",
-        "{} day".format(str(limit))）
-    )
+        "EVMOS", "{} day".format(str(limit)))
     pic = utils.build_graph(cut_data, title=caption)
     utils.send_autodestruction_photo(
         bot, update, pic, caption, job_queue, destruct_in=600, quote=False)
