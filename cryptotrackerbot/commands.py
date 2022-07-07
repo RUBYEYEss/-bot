@@ -27,7 +27,7 @@ matplotlib.use('TKAgg')
 
 
 @run_async
-def evmos_command(bot, update, args, job_queue):
+def evmos_command(bot, update, args=480 , job_queue):
 
     response = cryptoapi.get_evmos()
     # print(response)
