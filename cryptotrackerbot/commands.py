@@ -27,8 +27,8 @@ matplotlib.use('TKAgg')
 
 
 @run_async
-def evmos_command(bot, update, job_queue, args=480 ):
-
+def evmos_command(bot, update, args ,job_queue ):
+    print(args)
     response = cryptoapi.get_evmos()
     # print(response)
     # if 'Response' in response and response['Response'] == 'Error':  # return if response from api is error
