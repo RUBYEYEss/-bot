@@ -15,9 +15,12 @@
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
 
 
-BTC = "⛏"
-USD = "💰"
-EUR = "💶"
+from locale import CRNCYSTR
+
+
+CNY = "🐼"
+USD = "💲"
+NT = "🤑"
 ARROW_UP = "🔼"
 ARROW_DOWN = "🔽"
 GRPAH_UP = "📈"

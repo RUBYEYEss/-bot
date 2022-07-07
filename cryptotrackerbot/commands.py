@@ -23,7 +23,27 @@ from cryptotrackerbot import emoji
 
 from telegram.ext.dispatcher import run_async
 
+@run_async
 
+def evmos_command(bot, update, "evmos", job_queue):
+
+    response = cryptoapi.get_price("evmos")
+    #print(response)
+    # if 'Response' in response and response['Response'] == 'Error':  # return if response from api is error
+    #     text = "<b>Error!</b>"
+    #     text += "\n{}".format(response['Message']) if 'Message' in response else ''
+    #     utils.send_autodestruction_message(bot, update, job_queue, text)
+    #     return
+
+    # text = ""
+    for coin in response:
+        text += "<b>— {}:</b>".format(coin)
+        prices = response[coin]
+        for fiat in prices:
+            emoji_coin = emoji.USD if fiat.upper() == 'USD' else emoji.CNY if fiat.upper() == '人民币' else emoji.NT if fiat.upper() == '新臺幣' else ""
+            text += "\n  - {}{}: {}".format(emoji_coin, fiat, utils.sep(prices[fiat]))
+        text += "\n\n"
+    utils.send_autodestruction_message(bot, update, job_queue, text)
 
 @run_async
 def price_command(bot, update, args, job_queue):
