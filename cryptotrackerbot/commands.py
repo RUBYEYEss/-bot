@@ -31,7 +31,7 @@ def evmos_command(bot, update, args ,job_queue ):
     if args== []:
         limit = 480
     else:
-        limit = args[1]
+        limit = args[0]
     response = cryptoapi.get_evmos()
     # print(response)
     # if 'Response' in response and response['Response'] == 'Error':  # return if response from api is error
