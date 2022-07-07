@@ -13,14 +13,13 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
-
-
-from cryptotrackerbot import commands
-import logging
-import sys
-from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters)
 import matplotlib
 matplotlib.use('Agg')
+from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters)
+import sys
+import logging
+from cryptotrackerbot import commands
+
 # import tkinter
 
 

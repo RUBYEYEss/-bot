@@ -13,6 +13,8 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with CryptoTrackerBot.  If not, see <http://www.gnu.org/licenses/>.
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import io
 import datetime
@@ -24,8 +26,7 @@ import matplotlib.dates as mdates
 from matplotlib.finance import candlestick_ohlc
 from telegram.error import BadRequest
 from cryptotrackerbot import emoji
-import matplotlib
-matplotlib.use('Agg')
+
 
 
 # matplotlib.use('Agg')
