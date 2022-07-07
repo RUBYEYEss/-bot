@@ -27,7 +27,7 @@ from telegram.ext.dispatcher import run_async
 
 def evmos_command(bot, update, job_queue):
     
-    response = cryptoapi.get_price("evmos")
+    response = cryptoapi.get_evmos()
     #print(response)
     # if 'Response' in response and response['Response'] == 'Error':  # return if response from api is error
     #     text = "<b>Error!</b>"
