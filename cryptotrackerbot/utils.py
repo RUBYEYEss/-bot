@@ -107,7 +107,7 @@ def string_to_number(string):
 
 
 def build_graph(ohlc, title=''):
-    fig = pyplot.figure(figsize=(15, 7.5))
+    fig = plt.figure(figsize=(15, 7.5))
     ax1 = fig.add_subplot(111)
 
     for i in ohlc:
